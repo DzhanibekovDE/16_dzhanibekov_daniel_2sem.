@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Rep/16_dzhanibekov_daniel_2sem",
-      "program": "c:/Rep/16_dzhanibekov_daniel_2sem/build/Debug/outDebug",
+      "cwd": "c:/Rep/16_dzhanibekov_daniel_2sem/7week",
+      "program": "c:/Rep/16_dzhanibekov_daniel_2sem/7week/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
