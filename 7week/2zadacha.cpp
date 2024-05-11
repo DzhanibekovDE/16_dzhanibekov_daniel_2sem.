@@ -5,6 +5,10 @@
 #include <vector>
 #include <atomic>
 //const double M_PI = 3.14159265358979323846;
+// Определение M_PI
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 const double L = 1.0; // Длина иглы
 const double D = 1.0; // Расстояние между линиями

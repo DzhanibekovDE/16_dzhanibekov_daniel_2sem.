@@ -10,15 +10,13 @@ public:
     BigInteger();
     explicit BigInteger(const std::string& str);
     
-    // Операции
-    BigInteger add(const BigInteger& other) const;
-    BigInteger subtract(const BigInteger& other) const;
-    BigInteger multiply(const BigInteger& other) const;
-    BigInteger divide(const BigInteger& other, int precision = 33) const;
+    // Арифметические операторы 
+    BigInteger operator+(const BigInteger& other) const;
+    BigInteger operator-(const BigInteger& other) const;
+    BigInteger operator*(const BigInteger& other) const;
+    BigInteger operator/(const BigInteger& other) const;
 
-    // Вспомогательные методы
-    std::string toString() const;
-
+ 
     // Операторы сравнения
     bool operator==(const BigInteger& other) const;
     bool operator!=(const BigInteger& other) const;
@@ -27,10 +25,12 @@ public:
     bool operator>(const BigInteger& other) const;
     bool operator>=(const BigInteger& other) const;
     
+    
     bool less_abs(const BigInteger& other) const;
     bool leq_abs(const BigInteger& other) const;
 
-    //bool isNeg(const BigInteger& other) const {return isNegative;}
+        // Вспомогательные методы
+    std::string toString() const;
 
 private:
     std::string number; // Хранение числа в виде строки для упрощения демонстрации

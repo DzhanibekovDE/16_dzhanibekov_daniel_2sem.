@@ -85,7 +85,7 @@ bool BigInteger::leq_abs(const BigInteger& other) const {
     return false; // числа равны
 }
 
-BigInteger BigInteger::add(const BigInteger& other) const {
+BigInteger BigInteger::operator+(const BigInteger& other) const {
     std::string result;
     int carry = 0;
     int sum = 0;
@@ -120,14 +120,16 @@ BigInteger BigInteger::add(const BigInteger& other) const {
             return BigInteger('+'+result);
     } else {
         if (other.isNegative){
-            return this->subtract(BigInteger('+'+b)); 
+            //return this->subtract(BigInteger('+'+b)); 
+            return *this - BigInteger('+'+b);
         } else {
-            return other.subtract(BigInteger('+'+a));
+            //return other.subtract(BigInteger('+'+a));
+            return other - BigInteger('+'+a);
         }
     }
 }
 
-BigInteger BigInteger::subtract(const BigInteger& other) const {
+BigInteger BigInteger::operator-(const BigInteger& other) const {
     // Вычетание 
     std::string result;
     int carry = 0;
@@ -187,13 +189,13 @@ BigInteger BigInteger::subtract(const BigInteger& other) const {
             return BigInteger(sign+result);
     } else {
         if (other.isNegative)
-            return this->add(BigInteger('+'+other.number)); 
+            return *this + BigInteger('+' + other.number); 
         else
-            return this->add(BigInteger('-'+other.number));
+            return *this + BigInteger('-' + other.number);
     }  
 }
 
-BigInteger BigInteger::multiply(const BigInteger& other) const {
+BigInteger BigInteger::operator*(const BigInteger& other) const {
     int n1 = this->number.size();
     int n2 = other.number.size();
     std::vector<int> pos(n1 + n2, 0);
@@ -232,9 +234,10 @@ BigInteger BigInteger::multiply(const BigInteger& other) const {
     }
 
     return BigInteger(sign+result);
+
 }
 
-BigInteger BigInteger::divide(const BigInteger& other, int precision) const {
+BigInteger BigInteger::operator/(const BigInteger& other) const {
     if (other == BigInteger("0")) {
         throw std::invalid_argument("Division by zero");
     }
@@ -258,11 +261,10 @@ BigInteger BigInteger::divide(const BigInteger& other, int precision) const {
     }
 
     // Добавляем нули к остатку для достижения требуемой точности
-    for (int i = 0; i <= precision; ++i) {
+    for (int i = 0; i <= 33; ++i) {
         int count = 0;
-        // while (remainder >= divisor || (i == 0 && count == 0)) {
         while (divisor.leq_abs(remainder) || (i == 0 && count == 0)) {
-            remainder = remainder.subtract(divisor);
+            remainder = remainder - divisor;
             ++count;
         }
         result += std::to_string(count);
@@ -270,7 +272,7 @@ BigInteger BigInteger::divide(const BigInteger& other, int precision) const {
             result += ".";
             decimalPointAdded = true;
         }
-        remainder = remainder.multiply(BigInteger("+10"));
+        remainder = remainder * BigInteger("+10");
     }
 
     // Удаление ненужных нулей после запятой
@@ -280,4 +282,4 @@ BigInteger BigInteger::divide(const BigInteger& other, int precision) const {
     }
     
     return BigInteger(sign+result);
-};
+}
