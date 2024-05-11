@@ -9,7 +9,6 @@
 #include <math.h>
 
 void testOperations() {
-    std::cout << "num1 >= num2 > 0 !\n";
     
     std::string input1, input2;
 
