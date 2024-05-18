@@ -1,3 +1,12 @@
+# Ignore everything
+*
+
+# But do not ignore .cpp, .h, and .txt files
+!*.cpp
+!*.h
+!*.txt
+
+# Ignore Visual Studio Code settings, except specified files
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
