@@ -10,7 +10,7 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-const double L = 1.0; // Длина иглы
+const double L = 0.9; // Длина иглы
 const double D = 1.0; // Расстояние между линиями
 const long long N = 100000000; // Количество бросков (подобрал чтобы попадало в точность)
 
@@ -35,8 +35,8 @@ void throw_needles(long long num_throws) {
 
 int main() {
     int num_threads = std::thread::hardware_concurrency();
-    //std::cout << num_threads << std::endl;
-    std::vector<std::thread> threads;
+    std::vector<std::thread> threads;// создается вектор для хранения объектов потока, 
+    //где каждый элемент вектора будет представлять собой отдельный поток, выполняющий функцию throw_needles
 
     long long throws_per_thread = N / num_threads;
 
