@@ -4,7 +4,7 @@
 #include <numeric>
 #include <chrono>
 
-void sum_part(const std::vector<int>& data, size_t start, size_t end, long long& result) {
+void sum_part(const std::vector<int>& data, size_t start, size_t end, long long& result) {   //вычисляет сумму части вектора в указанном диапазоне start до end и сохраняет результат в result.
     long long sum = 0;
     for (size_t i = start; i < end; ++i) {
         sum += data[i];
@@ -12,7 +12,9 @@ void sum_part(const std::vector<int>& data, size_t start, size_t end, long long&
     result = sum;
 }
 
-long long parallel_sum(const std::vector<int>& data, int num_threads) {
+long long parallel_sum(const std::vector<int>& data, int num_threads) { // Разделяет вектор на части равной длины (кроме последней, которая может быть длиннее).
+//Создает поток для каждого фрагмента, где каждый поток выполняет sum_part.
+//Ждет завершения всех потоков и суммирует результаты.
     size_t total_elements = data.size();
     size_t chunk_size = total_elements / num_threads;
     std::vector<std::thread> threads;
@@ -32,8 +34,9 @@ long long parallel_sum(const std::vector<int>& data, int num_threads) {
     return total_sum;
 }
 
-int main() {
-    std::vector<int> data(100000000, 1); // 100 миллионов элементов, каждый равен 1
+int main() {   //Создает вектор размером 100 миллионов, где каждый элемент равен 1.
+               //Запускает parallel_sum с различным числом потоков, измеряет время выполнения и выводит результаты.
+    std::vector<int> data(100000000, 1); 
 
     for (int num_threads = 1; num_threads <= 64; num_threads *= 2) {
         auto start_time = std::chrono::high_resolution_clock::now();

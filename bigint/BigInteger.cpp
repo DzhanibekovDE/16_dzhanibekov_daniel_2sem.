@@ -15,7 +15,7 @@ BigInteger::BigInteger(const std::string& str) {
     } else if (!str.empty() && str[0] == '+') {
         isNegative = false;
         number = str.substr(1);
-    } 
+    }
 }
 
 std::string BigInteger::toString() const {
